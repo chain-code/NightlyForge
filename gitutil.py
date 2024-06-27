@@ -11,7 +11,7 @@ def GetBranchName(repo_dir):
 
     return name.strip()
 
-def Checkout(repo_dir, branch, submodule=True):
+def Checkout(repo_dir, branch):
     if not branch:
         branch = 'master'
 

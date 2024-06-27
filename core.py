@@ -1,10 +1,10 @@
 import queue
-
-
 import pyutil
 import os
 import json
 import gitutil
+import shutil
+from datetime import datetime
 import log
 logger = log.GetLogger()
 kLastBuildFile = 'LastVersion.txt'
@@ -17,7 +17,8 @@ class Nightly:
 
     def buildInstaller(self):
         logger.debug('开始每日更新文档')
-        print("开始上传")
+        print("开始备份文档")
+        self.AutoBackups()
         print("开始读取上次构建的信息")
         self.LoadLastBuildInfo()
         print("开始切换项目分支")
@@ -36,6 +37,25 @@ class Nightly:
             # mailer.SendMail(self.schema, last_build, version, download_links, comment_issue)
        # if self.GetOption('record_version', True):
             #self.RecordBuildVersion(version)
+    def AutoBackups(self):
+        if self.GetOption('autobackups', False):
+            print("开始自动备份文档")
+            logger.info('开始自动备份文档')
+            # 获取备份路径
+            curPath=os.getcwd()
+            backupspath=os.path.join(curPath,"hugobackups")
+            path=self.GetOption("backupspath",backupspath)
+            # 若路径不存在，则创建路径
+            if not os.path.exists(path):
+                os.makedirs(path,exist_ok=True)
+
+            current_time = datetime.now().strftime("%Y年%m月%d日%H时%M分%S秒-备份")
+            print("-- 创建文件夹： "+current_time)
+            backupspath=os.path.join(backupspath,current_time)
+            # os.makedirs(backupspath,exist_ok=True)
+            # copy 目标文件到目标路径
+            target_path=self.GetOption("targetpath","../document")
+            shutil.copytree(target_path, backupspath)
 
     def PushProjects(self):
         for project in self.schema['projects']:
@@ -64,7 +84,7 @@ class Nightly:
         for project in self.schema['projects']:
             if os.path.exists(project['path']):
                 branch = self.GetProjectOption(project, 'branch', gitutil.GetBranchName(project['path']))
-                gitutil.Checkout(project['path'], branch, submodule=project.get('sync_submodule'))
+                gitutil.Checkout(project['path'], branch)
 
     def GetProjectOption(self, project, key, default):
         ''' 获取项目选项，如果项目没有指定该选项尝试获取全局选项，如果没有全局选项则使用默认值 '''

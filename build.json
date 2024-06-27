@@ -1,11 +1,12 @@
 {
   "options": {
     "send_mail": false,
-    "sync_submodule": false,
-    "verbose_commit_log": true,
     "record_version": true,
     "concurrency": 8,
-    "hugo": false
+    "hugo": false,
+    "backupspath": "./hugobackups",
+    "targetpath": "../document",
+    "autobackups": true
   },
   "environment": {
     "GOPATH": "C:\\tools\\gopath",
@@ -16,7 +17,6 @@
       "name": "document",
       "ename": "document",
       "id": "golibs/document/",
-      "sync_submodule": false,
       "path": "../document",
       "branch": "master",
       "pull": true,
@@ -26,7 +26,6 @@
       "name": "public",
       "ename": "public",
       "id": "golibs/public/",
-      "sync_submodule": false,
       "path": "../public",
       "branch": "master",
       "pull": false,
