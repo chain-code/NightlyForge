@@ -1,0 +1,39 @@
+{
+  "options": {
+    "send_mail": false,
+    "sync_submodule": false,
+    "verbose_commit_log": true,
+    "record_version": true,
+    "concurrency": 8,
+    "hugo": false
+  },
+  "environment": {
+    "GOPATH": "C:\\tools\\gopath",
+    "GO111MODULE": "on"
+  },
+  "projects": [
+    {
+      "name": "document",
+      "ename": "document",
+      "id": "golibs/document/",
+      "sync_submodule": false,
+      "path": "../document",
+      "branch": "master",
+      "pull": true,
+      "push": true
+    },
+    {
+      "name": "public",
+      "ename": "public",
+      "id": "golibs/public/",
+      "sync_submodule": false,
+      "path": "../public",
+      "branch": "master",
+      "pull": false,
+      "push": true
+    }
+  ],
+  "location": {
+    "log":"log"
+  }
+}
