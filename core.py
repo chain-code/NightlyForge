@@ -60,6 +60,7 @@ class Nightly:
     def PushProjects(self):
         for project in self.schema['projects']:
             if os.path.exists(project['path']) and gitutil.Check_git_status(project['path']):
+                print("---   ",project['path'])
                 gitutil.Add(project['path'])
                 gitutil.Commit(project['path'])
                 gitutil.Push(project['path'],project['branch'])

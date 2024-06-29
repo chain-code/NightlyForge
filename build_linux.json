@@ -1,0 +1,38 @@
+{
+    "options": {
+      "send_mail": false,
+      "record_version": true,
+      "concurrency": 8,
+      "hugo": true,
+      "backupspath": "./hugobackups",
+      "targetpath": "../content",
+      "autobackups": true
+    },
+    "environment": {
+      "GOPATH": "C:\\tools\\gopath",
+      "GO111MODULE": "on"
+    },
+    "projects": [
+      {
+        "name": "content",
+        "ename": "content",
+        "id": "golibs/content/",
+        "path": "../content",
+        "branch": "master",
+        "pull": true,
+        "push": true
+      },
+      {
+        "name": "public",
+        "ename": "public",
+        "id": "golibs/public/",
+        "path": "../public",
+        "branch": "master",
+        "pull": false,
+        "push": true
+      }
+    ],
+    "location": {
+      "log":"log"
+    }
+  }
